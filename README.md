@@ -8,22 +8,22 @@
 5. PROFIT! // You should get the `output.txt` file with tidy data
 
 ## How does it works?
-1. Loading data
+### Loading data
 ```r
 
 ```
 
-2. Merging data 
+### Merging data 
 ```r
 
 ```
 
-3. Tiding 
+### Tiding 
 ```r
 
 ```
 
-4. Generating output
+### Generating output
 ```r
 write.table(tidy, "output.txt", row.names = FALSE)
 ```
