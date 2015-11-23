@@ -69,40 +69,12 @@ clean = cbind(result[['subject']], result[['y']], result[['X']])
 ```
 
 ### Tiding 
-#### Prepare
 ```r
-subs = unique(clean$Subject)
-acts = unique(clean$Activity)
-
-tidy = 
-    as.data.frame(
-        matrix(
-            nrow = length(subs) * length(acts),
-            ncol = ncol(clean)
-        )
-    )
-```
-
-#### Processing
-```r
-row = 1
-for (i in seq_along(subs)) {
-    for (j in seq_along(acts)) {
-        tidy[row, 1] <- subs[i]
-        tidy[row, 2] <- acts[j]
-        tidy[row, 3:ncol(clean)] <-
-            colMeans(
-                clean[
-                    clean$Subject == subs[i] &
-                    clean$Activity == acts[j],
-                    3:ncol(clean)
-                ],
-                na.rm = TRUE
-            )
-            
-        row = row + 1
-    }
-}
+tidy <- aggregate(
+    clean[, 3:ncol(clean)],
+    by = list(clean$Subject, clean$Activity),
+    FUN = mean
+)
 ```
 
 ### Generating output

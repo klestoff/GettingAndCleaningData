@@ -53,35 +53,12 @@ clean = cbind(result[['subject']], result[['y']], result[['X']])
 rm(list = c("result", "features", "labels", "datasets", "colNames", "colIndex", "variants", "i", "j", "tmp"))
 
 # Tiding data
-subs = unique(clean$Subject)
-acts = unique(clean$Activity)
-
-tidy = 
-    as.data.frame(
-        matrix(
-            nrow = length(subs) * length(acts),
-            ncol = ncol(clean)
-        )
-    )
-
-row = 1
-for (i in seq_along(subs)) {
-    for (j in seq_along(acts)) {
-        tidy[row, 1] <- subs[i]
-        tidy[row, 2] <- acts[j]
-        tidy[row, 3:ncol(clean)] <-
-            colMeans(
-                clean[
-                    clean$Subject == subs[i] &
-                    clean$Activity == acts[j],
-                    3:ncol(clean)
-                ],
-                na.rm = TRUE
-            )
-            
-        row = row + 1
-    }
-}
+tidy <- aggregate(
+    clean[, 3:ncol(clean)],
+    by = list(clean$Subject, clean$Activity),
+    FUN = mean
+)
+tidy <- tidy[order(tidy[1], tidy[2]), ]
 
 # Output
 write.table(tidy, "output.txt", row.names = FALSE)
