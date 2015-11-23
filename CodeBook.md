@@ -1,10 +1,5 @@
 # Getting and Cleaning Data Course Project Code Book
 
-## Variables and it's description
-Variable  | Description
-----------|-------------
-
-
 ## How does it works?
 ### Setuping
 ```r
