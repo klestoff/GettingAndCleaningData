@@ -6,24 +6,3 @@
 3. Run script `run_analysis.R`
 4. ...
 5. PROFIT! // You should get the `output.txt` file with tidy data
-
-## How does it works?
-### Loading data
-```r
-
-```
-
-### Merging data 
-```r
-
-```
-
-### Tiding 
-```r
-
-```
-
-### Generating output
-```r
-write.table(tidy, "output.txt", row.names = FALSE)
-```
